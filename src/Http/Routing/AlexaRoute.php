@@ -78,7 +78,7 @@ class AlexaRoute extends Route
      */
     public function getUri()
     {
-        return parent::getUri() . $this->getRouteIntent();
+        return parent::getUri();// . $this->getRouteIntent();
     }
 
     /**
@@ -87,7 +87,7 @@ class AlexaRoute extends Route
      * @return string
      */
     public function uri() {
-        return parent::uri() . $this->getRouteIntent();
+        return parent::uri();// . $this->getRouteIntent();
     }
 
     /**
@@ -98,9 +98,9 @@ class AlexaRoute extends Route
     protected function compileRoute()
     {
         //todo: we're doing this to support < 5.4 - remove this in 5.5
-        if(is_callable("parent::extractOptionalParameters")){
-            return parent::compileRoute();
-        }
+        // if(is_callable("parent::extractOptionalParameters")){
+        //     return parent::compileRoute();
+        // }
 
         if (! $this->compiled) {
 
