@@ -78,7 +78,7 @@ class AlexaRoute extends Route
      */
     public function getUri()
     {
-        return parent::getUri();// . $this->getRouteIntent();
+        return parent::getUri() . $this->getRouteIntent();
     }
 
     /**
@@ -87,7 +87,7 @@ class AlexaRoute extends Route
      * @return string
      */
     public function uri() {
-        return parent::uri();// . $this->getRouteIntent();
+        return parent::uri() . $this->getRouteIntent();
     }
 
     /**
