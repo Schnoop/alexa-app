@@ -116,7 +116,7 @@ class Certificate
             throw new InvalidCertificateException("The URL is using an unsupported scheme. Should be https");
         }
 
-        if (isset($uriParts['port']) === false || array_key_exists('port', $uriParts) && $uriParts['port'] != array_get($this->config,'origin.port')) {
+        if (array_key_exists('port', $uriParts) && $uriParts['port'] != array_get($this->config,'origin.port')) {
             throw new InvalidCertificateException("The URL is using an unsupported https port");
         }
     }
