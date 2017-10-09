@@ -9,7 +9,6 @@ use Develpr\AlexaApp\Exceptions\InvalidAppIdException;
 use Develpr\AlexaApp\Exceptions\InvalidCertificateException;
 use Develpr\AlexaApp\Exceptions\InvalidRequestTimestamp;
 use Develpr\AlexaApp\Exceptions\InvalidSignatureChainException;
-use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request as IlluminateRequest;
 
 class Certificate
@@ -34,24 +33,17 @@ class Certificate
     private $config;
 
     /**
-     * @var Log
-     */
-    private $log;
-
-    /**
      * Certificate constructor.
      *
-     * @param AlexaRequest $alexaRequest
+     * @param AlexaRequest        $alexaRequest
      * @param CertificateProvider $certificateProvider
-     * @param Log $log
-     * @param array $config
+     * @param array               $config
      */
-    public function __construct(AlexaRequest $alexaRequest, CertificateProvider $certificateProvider, Log $log, array $config)
+    public function __construct(AlexaRequest $alexaRequest, CertificateProvider $certificateProvider, array $config)
     {
         $this->alexaRequest = $alexaRequest;
         $this->certificateProvider = $certificateProvider;
         $this->config = $config;
-        $this->log = $log;
     }
 
     /**
@@ -76,7 +68,7 @@ class Certificate
         $certificateResult = $this->verifyCertificate($request);
 
         if ($certificateResult === 1) {
-            $this->log->debug('SSL fine!');
+            \Log::debug('SSL is fine.');
             return $next($request);
         } elseif ($certificateResult === 0) {
             throw new InvalidSignatureChainException("The request did not validate against the certificate chain.");
