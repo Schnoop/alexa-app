@@ -104,19 +104,19 @@ class Certificate
     {
         $uriParts = parse_url($keychainUri);
 
-        if (strcasecmp($uriParts['host'], array_get($this->config, 'origin.host')) !== 0) {
+        if (isset($uriParts['host']) === false || strcasecmp($uriParts['host'], array_get($this->config, 'origin.host')) !== 0) {
             throw new InvalidCertificateException("The host for the Certificate provided in the header is invalid");
         }
 
-        if (strpos($uriParts['path'], array_get($this->config, 'origin.path')) !== 0) {
+        if (isset($uriParts['path']) === false || strpos($uriParts['path'], array_get($this->config, 'origin.path')) !== 0) {
             throw new InvalidCertificateException("The URL path for the Certificate provided in the header is invalid");
         }
 
-        if (strcasecmp($uriParts['scheme'], array_get($this->config, 'origin.scheme')) !== 0) {
+        if (isset($uriParts['scheme']) === false || strcasecmp($uriParts['scheme'], array_get($this->config, 'origin.scheme')) !== 0) {
             throw new InvalidCertificateException("The URL is using an unsupported scheme. Should be https");
         }
 
-        if (array_key_exists('port', $uriParts) && $uriParts['port'] != array_get($this->config,'origin.port')) {
+        if (isset($uriParts['port']) === false || array_key_exists('port', $uriParts) && $uriParts['port'] != array_get($this->config,'origin.port')) {
             throw new InvalidCertificateException("The URL is using an unsupported https port");
         }
     }
