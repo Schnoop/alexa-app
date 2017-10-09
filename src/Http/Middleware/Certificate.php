@@ -68,7 +68,6 @@ class Certificate
         $certificateResult = $this->verifyCertificate($request);
 
         if ($certificateResult === 1) {
-            \Log::debug('SSL is fine.');
             return $next($request);
         } elseif ($certificateResult === 0) {
             throw new InvalidSignatureChainException("The request did not validate against the certificate chain.");
